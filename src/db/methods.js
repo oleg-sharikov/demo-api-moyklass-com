@@ -1,47 +1,7 @@
-import { fn, col, Op, QueryTypes } from 'sequelize';
+import { QueryTypes } from 'sequelize';
 
 export default function initDbMethods({ sequelize, models }) {
   const lessons = {
-    // search: ({ offset, limit, date: [start, end] }) => {
-    //   const tempSQL = sequelize.dialect.queryGenerator
-    //     .selectQuery('lessons', {
-    //       attributes: ['id'],
-    //       offset,
-    //       limit,
-    //     })
-    //     .slice(0, -1);
-
-    //   // return console.log(tempSQL);
-
-    //   return models.lessons.findAll({
-    //     include: [
-    //       {
-    //         model: sequelize.models.teachers,
-    //         required: true,
-    //         attributes: ['id', 'name'],
-    //         through: {
-    //           attributes: [],
-    //         },
-    //       },
-    //       {
-    //         model: sequelize.models.students,
-    //         required: true,
-    //         attributes: ['id', 'name'],
-    //         through: {
-    //           attributes: ['visit'],
-    //         },
-    //       },
-    //     ],
-    //     where: {
-    //       id: {
-    //         [Op.in]: sequelize.literal(`(${tempSQL})`),
-    //       },
-    //     },
-    //     attributes: { exclude: ['createdAt', 'updatedAt'] },
-    //     subQuery: false,
-    //   });
-    // },
-
     search: ({
       offset,
       limit,
