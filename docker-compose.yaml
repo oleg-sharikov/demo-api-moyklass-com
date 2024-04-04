@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: moyklass
+    ports:
+      - 5432:5432
+
+  api:
+    image: api
+    restart: always
+    build: ./
+    environment:
+      DB_HOST: db
+    ports:
+      - 4444:4444
