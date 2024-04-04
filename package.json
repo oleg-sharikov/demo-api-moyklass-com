@@ -11,5 +11,6 @@
     "express-validator": "^7.0.1",
     "pg": "^8.11.4",
     "sequelize": "^6.37.2"
-  }
+  },
+  "version": "0.0.1"
 }
