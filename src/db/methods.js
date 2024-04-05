@@ -86,10 +86,10 @@ export default function initDbMethods({ sequelize, models }) {
             "students->lesson_students"."visit" AS "student.visit"
           FROM
             "lessons" AS "lessons"
-            JOIN ("lesson_teachers" AS "teachers->lesson_teachers"
-              JOIN "teachers" AS "teachers" ON "teachers"."id" = "teachers->lesson_teachers"."teacher_id") ON "lessons"."id" = "teachers->lesson_teachers"."lesson_id"
-            JOIN ("lesson_students" AS "students->lesson_students"
-              JOIN "students" AS "students" ON "students"."id" = "students->lesson_students"."student_id") ON "lessons"."id" = "students->lesson_students"."lesson_id"
+            LEFT JOIN ("lesson_teachers" AS "teachers->lesson_teachers"
+              LEFT JOIN "teachers" AS "teachers" ON "teachers"."id" = "teachers->lesson_teachers"."teacher_id") ON "lessons"."id" = "teachers->lesson_teachers"."lesson_id"
+            LEFT JOIN ("lesson_students" AS "students->lesson_students"
+              LEFT JOIN "students" AS "students" ON "students"."id" = "students->lesson_students"."student_id") ON "lessons"."id" = "students->lesson_students"."lesson_id"
           WHERE
             "lessons"."id" IN (SELECT "id" FROM lessons_ids))
           AS lesson_students_teachers_details
@@ -100,8 +100,8 @@ export default function initDbMethods({ sequelize, models }) {
               "lessons"."id", COUNT("students"."id") AS "students_count"
             FROM
               "lessons" AS "lessons"
-              JOIN ("lesson_students" AS "students->lesson_students"
-                JOIN "students" AS "students" ON "students"."id" = "students->lesson_students"."student_id") ON "lessons"."id" = "students->lesson_students"."lesson_id"
+              LEFT JOIN ("lesson_students" AS "students->lesson_students"
+                LEFT JOIN "students" AS "students" ON "students"."id" = "students->lesson_students"."student_id") ON "lessons"."id" = "students->lesson_students"."lesson_id"
             WHERE
               "lessons"."id" IN (SELECT "id" FROM lessons_ids)
             GROUP BY

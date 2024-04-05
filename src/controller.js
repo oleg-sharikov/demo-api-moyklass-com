@@ -42,8 +42,12 @@ export default async function initController(dbMethods) {
           date: currentLesson.date,
           title: currentLesson.title,
           status: currentLesson.status,
-          students: new Map([[currentLesson.student.id, currentLesson.student]]),
-          teachers: new Map([[currentLesson.teacher.id, currentLesson.teacher]]),
+          students: new Map(
+            currentLesson.student.id && [[currentLesson.student.id, currentLesson.student]],
+          ),
+          teachers: new Map(
+            currentLesson.teacher.id && [[currentLesson.teacher.id, currentLesson.teacher]],
+          ),
         });
         return lessonsList;
       }, new Map());
